@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | MRPL Tender Commercial Evaluation System</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="dashboard">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <img src="{{ url_for('static', filename='images/mrpl_logo.png') }}"
+                 class="logo">
+
+            <h2>MRPL</h2>
+
+            <span>Tender System</span>
+
+        </div>
+
+        <ul>
+
+            <li class="active">
+
+                <i class="fa-solid fa-house"></i>
+
+                Dashboard
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-file-contract"></i>
+
+                Tenders
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-scale-balanced"></i>
+
+                Commercial Evaluation
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                Reports
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('logout') }}">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================= Main Content ================= -->
+
+    <main class="content">
+
+        <!-- Top Navbar -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>Tender Commercial Evaluation System</h1>
+
+                <p>MRPL Procurement Department</p>
+
+            </div>
+
+            <div class="user-box">
+
+                <i class="fa-solid fa-circle-user"></i>
+
+                <div>
+
+                    <h3>{{ full_name }}</h3>
+
+                    <span>{{ role }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+                <h2>{{ total_tenders }}</h2>
+
+                <p>Total Tenders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h2>{{ total_vendors }}</h2>
+
+                <p>Registered Vendors</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                <h2>{{ total_quotes }}</h2>
+
+                <p>Total Quotations</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h2>{{ total_reports }}</h2>
+
+                <p>Generated Reports</p>
+
+            </div>
+
+        </section>
+
+        <!-- Recent Tenders -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>Recent Tenders</h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tender No</th>
+
+                        <th>Tender Name</th>
+
+                        <th>Department</th>
+
+                        <th>Status</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for tender in tenders %}
+
+                    <tr>
+
+                        <td>{{ tender.tender_number }}</td>
+
+                        <td>{{ tender.tender_name }}</td>
+
+                        <td>{{ tender.department_name}}</td>
+
+                        <td>
+
+                            <span class="status">
+
+                                {{ tender.status }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+    <a href="{{ url_for('view_tender', tender_id=tender.tender_id) }}"
+       class="view-btn">
+        <i class="fa-solid fa-eye"></i>
+        View
+    </a>
+</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- Chart -->
+
+        <section class="chart-section">
+
+            <h2>Tender Status Overview</h2>
+
+            <canvas id="statusChart"></canvas>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+</body>
+
+</html>

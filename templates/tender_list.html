@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tenders | MRPL Tender Commercial Evaluation System</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/tender.css') }}">
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="dashboard">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <img src="{{ url_for('static', filename='images/mrpl_logo.png') }}"
+                 class="logo">
+
+            <h2>MRPL</h2>
+
+            <span>Tender System</span>
+
+        </div>
+
+        <ul>
+
+            <li>
+
+                <a href="{{ url_for('dashboard') }}">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <i class="fa-solid fa-file-contract"></i>
+
+                Tenders
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-scale-balanced"></i>
+
+                Commercial Evaluation
+
+            </li>
+
+            <li>
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                Reports
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('logout') }}">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ================= Main Content ================= -->
+
+    <main class="content">
+
+        <!-- Top Bar -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h1>Tender Management</h1>
+
+                <p>Manage all procurement tenders</p>
+
+            </div>
+
+            <div class="user-box">
+
+                <i class="fa-solid fa-circle-user"></i>
+
+                <div>
+
+                    <h3>{{ full_name }}</h3>
+
+                    <span>{{ role }}</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Tender Table -->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <h2>
+
+                    <i class="fa-solid fa-file-contract"></i>
+
+                    Active Tenders
+
+                </h2>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Tender No</th>
+                        <th>Tender Name</th>
+                        <th>Department</th>
+                        <th>Estimated Cost</th>
+                        <th>Closing Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+{% for tender in tenders %}
+
+<tr>
+
+    <td>{{ tender.tender_number }}</td>
+
+    <td>{{ tender.tender_name }}</td>
+
+    <td>{{ tender.department_name}}</td>
+
+    <td>₹ {{ "{:,.2f}".format(tender.estimated_cost) }}</td>
+
+    <td>{{ tender.closing_date }}</td>
+
+    <td>
+
+        <span class="status">
+
+            {{ tender.status }}
+
+        </span>
+
+    </td>
+
+    <td>
+
+        <a href="/view_tender/{{ tender.tender_id }}"
+   class="view-btn">
+
+    View
+
+</a>
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/tender.js') }}"></script>
+
+</body>
+
+</html>

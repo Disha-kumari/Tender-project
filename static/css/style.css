@@ -1,0 +1,419 @@
+
+/* ==========================================
+   MRPL Tender Commercial Evaluation System
+   Global Styles
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+
+    --primary:#0F172A;
+    --secondary:#2563EB;
+    --accent:#06B6D4;
+
+    --white:#ffffff;
+    --text:#E2E8F0;
+
+    --glass:rgba(255,255,255,0.08);
+
+    --border:rgba(255,255,255,0.20);
+
+    --shadow:0 20px 45px rgba(0,0,0,.35);
+
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:url("../images/background.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    position:relative;
+
+}
+.background-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        135deg,
+        rgba(5,20,50,.80),
+        rgba(13,45,95,.75),
+        rgba(0,0,0,.55)
+    );
+
+    backdrop-filter:blur(3px);
+
+}
+.container{
+
+    width:92%;
+
+    max-width:1450px;
+
+    height:85vh;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    position:relative;
+
+    z-index:2;
+
+}
+.left-panel{
+
+    width:50%;
+
+    color:white;
+
+    padding-right:60px;
+
+    animation:slideLeft 1s ease;
+
+}
+
+.logo{
+
+    width:150px;
+
+    margin-bottom:30px;
+
+}
+
+.left-panel h1{
+
+    font-size:60px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+.left-panel span{
+
+    color:#4ADE80;
+
+}
+
+.left-panel p{
+
+    margin-top:25px;
+
+    font-size:20px;
+
+    line-height:35px;
+
+    color:#d9e5ff;
+
+}
+.login-card{
+
+    width:460px;
+
+    padding:45px;
+
+    border-radius:30px;
+
+    background:var(--glass);
+
+    backdrop-filter:blur(25px);
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    color:white;
+
+    animation:slideRight 1s ease;
+
+}
+.login-card h2{
+
+    font-size:40px;
+
+    text-align:center;
+
+}
+
+.login-card p{
+
+    text-align:center;
+
+    margin-top:10px;
+
+    margin-bottom:40px;
+
+    color:#dbeafe;
+
+}
+/*==========================================
+        INPUT BOX
+==========================================*/
+
+.input-box{
+
+    width:100%;
+
+    height:60px;
+
+    background:rgba(255,255,255,0.10);
+
+    border:1px solid rgba(255,255,255,0.20);
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 20px;
+
+    margin-bottom:25px;
+
+    transition:.4s;
+
+}
+
+.input-box:hover{
+
+    border:1px solid #4ADE80;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 30px rgba(74,222,128,.20);
+
+}
+
+.input-box i{
+
+    color:white;
+
+    font-size:20px;
+
+    margin-right:15px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    color:white;
+
+    font-size:17px;
+
+}
+
+.input-box input::placeholder{
+
+    color:#CBD5E1;
+
+}
+/*==========================================
+            LOGIN BUTTON
+==========================================*/
+
+button{
+
+    width:100%;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:15px;
+
+    margin-top:15px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #0EA5E9
+    );
+
+    transition:.4s;
+
+    letter-spacing:1px;
+
+}
+
+button i{
+
+    margin-left:10px;
+
+}
+
+button:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 35px rgba(37,99,235,.45);
+
+    background:linear-gradient(
+        135deg,
+        #1D4ED8,
+        #06B6D4
+    );
+
+}
+/*==========================================
+        LOGIN CARD HOVER
+==========================================*/
+
+.login-card:hover{
+
+    transform:translateY(-8px);
+
+    transition:.5s;
+
+    box-shadow:
+
+    0 30px 60px rgba(0,0,0,.45);
+
+}
+
+/*==========================================
+            ANIMATIONS
+==========================================*/
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-70px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(70px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+/*==========================================
+        RESPONSIVE
+==========================================*/
+
+@media(max-width:1000px){
+
+.container{
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+.left-panel{
+
+    width:100%;
+
+    padding:0;
+
+    margin-bottom:40px;
+
+}
+
+.left-panel h1{
+
+    font-size:42px;
+
+}
+
+.login-card{
+
+    width:95%;
+
+}
+
+}
+
+/* Error Message */
+
+.error-message{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-bottom:20px;
+
+    background:#EF4444;
+
+    color:white;
+
+    border-radius:10px;
+
+    text-align:center;
+
+    font-size:15px;
+
+}

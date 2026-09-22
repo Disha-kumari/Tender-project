@@ -1,0 +1,433 @@
+/*=========================================================
+                    GOOGLE FONT & RESET
+=========================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:url("../images/background.jpg") no-repeat center center/cover;
+    min-height:100vh;
+    overflow-x:hidden;
+
+}
+
+/*=========================================================
+                        OVERLAY
+=========================================================*/
+
+.overlay{
+
+    position:fixed;
+    inset:0;
+    background:rgba(4,18,38,.82);
+    backdrop-filter:blur(7px);
+    z-index:-1;
+
+}
+
+/*=========================================================
+                    DASHBOARD LAYOUT
+=========================================================*/
+
+.dashboard{
+
+    display:flex;
+    min-height:100vh;
+
+}
+
+/*=========================================================
+                        SIDEBAR
+=========================================================*/
+
+.sidebar{
+
+    width:250px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
+    border-right:1px solid rgba(255,255,255,.12);
+
+    padding:20px;
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.logo-section{
+
+    text-align:center;
+    margin-bottom:20px;
+
+}
+
+.logo{
+
+    width:85px;
+    margin-bottom:10px;
+
+}
+
+.logo-section h2{
+
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
+
+}
+
+.logo-section span{
+
+    color:#b8d8ff;
+    font-size:14px;
+
+}
+
+.sidebar ul{
+
+    list-style:none;
+    margin-top:15px;
+
+}
+
+.sidebar ul li{
+
+    margin-bottom:12px;
+    border-radius:14px;
+    transition:.35s;
+
+}
+
+.sidebar ul li,
+.sidebar ul li a{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:15px 18px;
+
+}
+
+.sidebar ul li:hover{
+
+    background:#1b7cff;
+    transform:translateX(6px);
+
+}
+
+.sidebar .active{
+
+    background:#1b7cff;
+
+}
+
+/*=========================================================
+                        CONTENT
+=========================================================*/
+
+.content{
+
+    flex:1;
+    padding:35px;
+
+}
+
+/*=========================================================
+                        TOPBAR
+=========================================================*/
+
+.topbar{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    padding:22px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+}
+
+.topbar h1{
+
+    color:white;
+    font-size:30px;
+
+}
+
+.topbar p{
+
+    color:#b8d8ff;
+
+}
+
+.user-box{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.user-box i{
+
+    font-size:42px;
+    color:#00d4ff;
+
+}
+
+.user-box h3{
+
+    color:white;
+
+}
+
+.user-box span{
+
+    color:#8fd4ff;
+
+}
+
+/*=========================================================
+                    TABLE SECTION
+=========================================================*/
+
+.table-section{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(22px);
+
+    border-radius:24px;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    padding:30px;
+
+    animation:fadeUp .6s ease;
+
+}
+
+.table-header{
+
+    margin-bottom:25px;
+
+}
+
+.table-header h2{
+
+    color:white;
+    font-size:25px;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+}
+
+.table-header i{
+
+    color:#00c8ff;
+
+}
+
+/*=========================================================
+                        TABLE
+=========================================================*/
+
+table{
+
+    width:100%;
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+}
+
+thead{
+
+    background:#1679ff;
+
+}
+
+th{
+
+    color:white;
+    padding:18px;
+    font-weight:600;
+    font-size:15px;
+
+}
+
+td{
+
+    padding:18px;
+    color:white;
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+tbody tr{
+
+    transition:.3s;
+
+}
+
+tbody tr:hover{
+
+    background:rgba(255,255,255,.05);
+
+    transform:scale(1.01);
+
+}
+
+/*=========================================================
+                        STATUS
+=========================================================*/
+
+.status{
+
+    display:inline-block;
+
+    padding:7px 16px;
+
+    border-radius:30px;
+
+    background:#00b86b;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/*=========================================================
+                    VIEW BUTTON
+=========================================================*/
+
+.view-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+    background:linear-gradient(135deg,#1679ff,#00c8ff);
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    transition:.35s;
+
+}
+
+.view-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(0,170,255,.35);
+
+}
+
+/*=========================================================
+                        SCROLLBAR
+=========================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#1679ff;
+    border-radius:20px;
+
+}
+
+/*=========================================================
+                        ANIMATION
+=========================================================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/*=========================================================
+                        RESPONSIVE
+=========================================================*/
+
+@media(max-width:1000px){
+
+.dashboard{
+
+    flex-direction:column;
+
+}
+
+.sidebar{
+
+    width:100%;
+
+}
+
+.content{
+
+    padding:20px;
+
+}
+
+table{
+
+    display:block;
+    overflow-x:auto;
+
+}
+
+}

@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MRPL Tender Commercial Evaluation</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/view_tender.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- =======================
+            SIDEBAR
+    ======================== -->
+
+    <aside class="sidebar">
+
+       <div class="logo">
+
+    <img src="{{ url_for('static', filename='images/mrpl_logo.png') }}"
+         alt="MRPL Logo"
+         class="sidebar-logo">
+
+    <h2>MRPL</h2>
+
+</div>
+
+        <ul>
+
+            <li>
+
+                <a href="{{ url_for('dashboard') }}">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li class="active">
+
+                <a href="#">
+
+                    <i class="fa-solid fa-file-contract"></i>
+
+                    Tender Evaluation
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{{ url_for('logout') }}">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- =======================
+            MAIN CONTENT
+    ======================== -->
+
+    <main class="content">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+
+                    Tender Commercial Evaluation
+
+                </h1>
+
+                <p>
+
+                    Tender No :
+                    <strong>{{ tender.tender_number }}</strong>
+
+                </p>
+
+            </div>
+
+            <div class="user-box">
+
+                <i class="fa-solid fa-user"></i>
+
+                <div>
+
+                    <strong>
+
+                        {{ full_name }}
+
+                    </strong>
+
+                    <br>
+
+                    {{ role }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================
+                WORKFLOW STARTS HERE
+        ==================================== -->
+
+        <div class="workflow-container"
+             id="workflowContainer"
+             data-tender-id="{{ tender.tender_id }}"
+             data-initial-step="{{ initial_step }}">
+
+            <!-- ===================================
+                STEP PROGRESS RAIL
+            ==================================== -->
+
+            <div class="workflow-stepper" id="workflowStepper">
+
+                <div class="step-dot-wrap{% if initial_step == 1 %} current{% elif initial_step > 1 %} done{% endif %}" data-step="1" onclick="showPage(1)">
+                    <span class="step-dot">01</span>
+                    <span class="step-label">Tender Info</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 2 %} current{% elif initial_step > 2 %} done{% endif %}" data-step="2" onclick="showPage(2)">
+                    <span class="step-dot">02</span>
+                    <span class="step-label">Materials</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 3 %} current{% elif initial_step > 3 %} done{% endif %}" data-step="3" onclick="showPage(3)">
+                    <span class="step-dot">03</span>
+                    <span class="step-label">Upload Quotes</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 4 %} current{% elif initial_step > 4 %} done{% endif %}" data-step="4" onclick="showPage(4)">
+                    <span class="step-dot">04</span>
+                    <span class="step-label">OCR Verify</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 5 %} current{% elif initial_step > 5 %} done{% endif %}" data-step="5" onclick="showPage(5)">
+                    <span class="step-dot">05</span>
+                    <span class="step-label">Compare</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 6 %} current{% elif initial_step > 6 %} done{% endif %}" data-step="6" onclick="showPage(6)">
+                    <span class="step-dot">06</span>
+                    <span class="step-label">Evaluation</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 7 %} current{% elif initial_step > 7 %} done{% endif %}" data-step="7" onclick="showPage(7)">
+                    <span class="step-dot">07</span>
+                    <span class="step-label">Negotiation</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 8 %} current{% elif initial_step > 8 %} done{% endif %}" data-step="8" onclick="showPage(8)">
+                    <span class="step-dot">08</span>
+                    <span class="step-label">Report</span>
+                </div>
+
+                <div class="step-dot-wrap{% if initial_step == 9 %} current{% elif initial_step > 9 %} done{% endif %}" data-step="9" onclick="showPage(9)">
+                    <span class="step-dot">09</span>
+                    <span class="step-label">Complete</span>
+                </div>
+
+            </div>
+
+            <!-- ===================================
+                STEP 1
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 1 %} active{% endif %}" id="page1">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 01
+
+                    </span>
+
+                    <h2>
+
+                        Tender Information
+
+                    </h2>
+
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Tender Number
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ tender.tender_number }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Tender Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ tender.tender_name }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Department
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ tender.department_name }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Estimated Cost
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{% if tender.estimated_cost is not none %}₹ {{ '{:,.2f}'.format(tender.estimated_cost) }}{% else %}Not set{% endif %}"
+                            readonly>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Closing Date
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ tender.closing_date }}"
+                            readonly>
+
+                    </div>
+
+                    <div class="info-box">
+
+                        <label>
+
+                            Status
+
+                        </label>
+
+                        <input
+                            type="text"
+                            value="{{ tender.status }}"
+                            readonly>
+
+                    </div>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(2)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 2
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 2 %} active{% endif %}" id="page2">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 02
+
+                    </span>
+
+                    <h2>
+
+                        Estimated Material Requirement
+
+                    </h2>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="comparison-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Item Code</th>
+
+                                <th>Item Name</th>
+
+                                <th>Specification</th>
+
+                                <th>Unit</th>
+
+                                <th>Quantity</th>
+
+                                <th>Estimated Rate (₹)</th>
+
+                                <th>Estimated Amount (₹)</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for item in items %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ item.item_code }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.item_name }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.specification }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.unit }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.quantity }}
+
+                                </td>
+
+                                <td>
+
+                                    ₹ {{ "{:,.2f}".format(item.estimated_rate) }}
+
+                                </td>
+
+                                <td>
+
+                                    ₹ {{ "{:,.2f}".format(item.estimated_amount) }}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-boxes-stacked"></i>
+
+                        <h3>
+
+                            {{ items|length }}
+
+                        </h3>
+
+                        <p>
+
+                            Total Items
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3>
+
+                            {% if tender.estimated_cost is not none %}₹ {{ "{:,.2f}".format(tender.estimated_cost) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Estimated Cost
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(1)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(3)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 3
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 3 %} active{% endif %}" id="page3">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 03
+
+                    </span>
+
+                    <h2>
+
+                        Upload Vendor Quotations
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Upload quotation PDF documents received from participating vendors.
+
+                </p>
+
+                <div class="upload-grid">
+
+                {% for vendor in vendors %}
+<div class="upload-card">
+
+    <div class="vendor-header">
+        <i class="fa-solid fa-building"></i>
+        <div>
+            <h3>{{ vendor.company_name }}</h3>
+            <small>{{ vendor.contact_person }}</small>
+        </div>
+    </div>
+
+    {% if vendor.vendor_id in uploaded_vendor_ids %}
+
+        <span class="upload-status" style="color:#15803d;font-weight:600;">
+            <i class="fa-solid fa-circle-check"></i> Quotation Saved
+        </span>
+
+        <form method="POST"
+              action="{{ url_for('delete_vendor_quotation', tender_id=tender.tender_id, vendor_id=vendor.vendor_id) }}"
+              style="margin-top:8px;">
+
+            <button
+                type="submit"
+                class="back-btn"
+                style="background:#fde8e8;color:#b91c1c;border-color:#f3b8b8;width:100%;"
+                onclick="return confirm('Delete this vendor\'s saved quotation? You will need to re-upload.');">
+
+                <i class="fa-solid fa-trash"></i>
+                Delete &amp; Re-upload
+
+            </button>
+
+        </form>
+
+    {% else %}
+
+        <input
+            type="file"
+            id="vendor{{ vendor.vendor_id }}"
+            class="vendor-file"
+            accept=".pdf">
+
+        <button
+            class="upload-btn"
+            data-vendor-id="{{ vendor.vendor_id }}"
+            onclick="selectQuotationFile(this.dataset.vendorId)">
+
+            <i class="fa-solid fa-upload"></i>
+            Upload PDF
+
+        </button>
+
+        <span
+            class="upload-status"
+            id="status{{ vendor.vendor_id }}">
+
+            Not Uploaded
+
+        </span>
+
+    {% endif %}
+
+</div>
+{% endfor %}
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(2)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(4)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 4
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 4 %} active{% endif %}" id="page4">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 04
+
+                    </span>
+
+                    <h2>
+
+                        OCR Verification
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Verify the quotation details extracted from uploaded PDF documents before proceeding to commercial evaluation.
+
+                </p>
+
+                <div class="table-container">
+
+                    <table class="comparison-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Vendor</th>
+
+                                <th>Item Code</th>
+
+                                <th>Item Name</th>
+
+                                <th>Quantity</th>
+
+                                <th>Quoted Rate (₹)</th>
+
+                                <th>Total Amount (₹)</th>
+
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="ocrTableBody">
+
+                            {% if quotations %}
+
+                                {% for quote in quotations %}
+
+                                <tr>
+
+                                    <td>
+
+                                        {{ quote.company_name }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ quote.item_code }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ quote.item_name }}
+
+                                    </td>
+
+                                    <td>
+
+                                        {{ quote.quantity }}
+
+                                    </td>
+
+                                    <td>
+
+                                        ₹ {{ "{:,.2f}".format(quote.quoted_rate) }}
+
+                                    </td>
+
+                                    <td>
+
+                                        ₹ {{ "{:,.2f}".format(quote.total_amount) }}
+
+                                    </td>
+
+                                    <td>
+
+                                        <span class="verified">
+
+                                            Verified
+
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            {% else %}
+
+                                <tr>
+
+                                    <td colspan="7" class="no-data">
+
+                                        No quotation data available.
+
+                                    </td>
+
+                                </tr>
+
+                            {% endif %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-file-circle-check"></i>
+
+                        <h3>
+
+                            {{ quotations|length }}
+
+                        </h3>
+
+                        <p>
+
+                            Records Extracted
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <h3>
+
+                            Ready
+
+                        </h3>
+
+                        <p>
+
+                            Verification Status
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(3)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(5)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 5
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 5 %} active{% endif %}" id="page5">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 05
+
+                    </span>
+
+                    <h2>
+
+                        Vendor Quotation Comparison
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Compare all vendor quotations item-wise to identify the lowest quotation (L1) for each material.
+
+                </p>
+
+                {% if items_comparison %}
+
+                    {% for entry in items_comparison %}
+
+                    <div class="item-compare-card">
+
+                        <div class="item-compare-head">
+
+                            <div>
+                                <span class="item-compare-code">{{ entry.item_code }}</span>
+                                <span class="item-compare-name">{{ entry.item_name }}</span>
+                            </div>
+
+                            <span class="item-compare-qty">Qty: {{ entry.quantity }}</span>
+
+                        </div>
+
+                        <div class="vendor-quote-list">
+
+                            {% for q in entry.quotes %}
+
+                            <div class="vendor-quote-row {% if q.is_l1 %}is-l1{% endif %}">
+
+                                <span class="vq-rank">
+                                    {% if q.is_l1 %}
+                                        <i class="fa-solid fa-trophy"></i> L1
+                                    {% else %}
+                                        L{{ loop.index }}
+                                    {% endif %}
+                                </span>
+
+                                <span class="vq-name">{{ q.company_name }}</span>
+
+                                <span class="vq-rate">₹ {{ "{:,.2f}".format(q.quoted_rate) }} / unit</span>
+
+                                <span class="vq-total">₹ {{ "{:,.2f}".format(q.total_amount) }}</span>
+
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="table-container">
+                        <table class="comparison-table">
+                            <tbody>
+                                <tr><td class="no-data">No vendor quotations uploaded for this tender yet.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                {% endif %}
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <h3>
+
+                            {{ vendor_totals|length }}
+
+                        </h3>
+
+                        <p>
+
+                            Vendors Participated
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Overall L1 Vendor
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3>
+
+                           {% if best_vendor %}₹ {{ "{:,.2f}".format(best_vendor.grand_total) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Lowest Total Quote
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(4)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(6)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 6
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 6 %} active{% endif %}" id="page6">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 06
+
+                    </span>
+
+                    <h2>
+
+                        Commercial Evaluation
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Vendor ranking based on the total commercial quotation submitted for this tender.
+
+                </p>
+
+                <div class="table-container">
+
+                    <table class="comparison-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Rank</th>
+
+                                <th>Vendor</th>
+
+                                <th>Total Amount (₹)</th>
+
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for vendor in vendor_totals %}
+
+                            <tr>
+
+                                <td>
+
+                                    L{{ loop.index }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ vendor.company_name }}
+
+                                </td>
+
+                                <td>
+
+                                    ₹ {{ "{:,.2f}".format(vendor.grand_total) }}
+
+                                </td>
+
+                                <td>
+
+                                    {% if loop.first %}
+
+                                    <span class="status-approved">
+
+                                        Selected for Negotiation
+
+                                    </span>
+
+                                    {% else %}
+
+                                    <span class="status-pending">
+
+                                        Evaluated
+
+                                    </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-ranking-star"></i>
+
+                        <h3>
+
+                            L1
+
+                        </h3>
+
+                        <p>
+
+                            {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}₹ {{ "{:,.2f}".format(best_vendor.grand_total) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Lowest Commercial Bid
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <h3>
+
+                            {{ vendor_totals|length }}
+
+                        </h3>
+
+                        <p>
+
+                            Vendors Evaluated
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(5)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(7)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 7
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 7 %} active{% endif %}" id="page7">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 07
+
+                    </span>
+
+                    <h2>
+
+                        Negotiation
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Record the final negotiated amount with the selected L1 vendor before generating the commercial evaluation report.
+
+                </p>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Selected L1 Vendor
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}₹ {{ "{:,.2f}".format(best_vendor.grand_total) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Original L1 Amount
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p class="section-description">
+
+                    Each item's current L1 (lowest) vendor and price are shown below. Enter a negotiated price per item where applicable — leave blank to keep the original L1 price.
+
+                </p>
+
+                <form id="negotiationForm"
+                      method="POST"
+                      action="{{ url_for('save_negotiation', tender_id=tender.tender_id) }}">
+
+                    <div class="table-container">
+
+                        <table class="comparison-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Current L1 Vendor</th>
+                                    <th>Original L1 Price (₹)</th>
+                                    <th>Negotiated Price (₹)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% if items_comparison %}
+
+                                    {% for entry in items_comparison %}
+
+                                    <tr>
+                                        <td>{{ entry.item_code }} &mdash; {{ entry.item_name }}</td>
+                                        <td>{{ entry.quotes[0].company_name }}</td>
+                                        <td>₹ {{ "{:,.2f}".format(entry.quotes[0].total_amount) }}</td>
+                                        <td>
+    <input
+        type="number"
+        step="0.01"
+        class="editable-field"
+        name="negotiated_{{ entry.tender_item_id }}"
+        value="{{ negotiations[entry.tender_item_id].negotiated_price if entry.tender_item_id in negotiations else '' }}"
+        placeholder="{{ '%.2f'|format(entry.quotes[0].total_amount) }}">
+    {% if entry.tender_item_id in negotiations %}
+        <br><small style="color:#15803d;">✓ Saved: ₹ {{ "{:,.2f}".format(negotiations[entry.tender_item_id].negotiated_price) }}</small>
+    {% endif %}
+                                   </td>
+                                    </tr>
+
+                                    {% endfor %}
+
+                                {% else %}
+
+                                    <tr><td colspan="4" class="no-data">No item-wise quotations to negotiate yet.</td></tr>
+
+                                {% endif %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </form>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(6)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        onclick="saveNegotiation()">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Negotiation
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(8)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- ===================================
+                STEP 8
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 8 %} active{% endif %}" id="page8">
+
+            <div class="section-card">
+
+                <div class="section-header">
+
+                    <span class="step-number">
+
+                        STEP 08
+
+                    </span>
+
+                    <h2>
+
+                        Final Report Generation
+
+                    </h2>
+
+                </div>
+
+                <p class="section-description">
+
+                    Review the final commercial evaluation before generating the Tender Commercial Evaluation Report.
+
+                </p>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-file-contract"></i>
+
+                        <h3>
+
+                            {{ tender.tender_number }}
+
+                        </h3>
+
+                        <p>
+
+                            Tender Number
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Selected Vendor
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3 id="finalAmount">
+
+                            {% if best_vendor %}₹ {{ "{:,.2f}".format(best_vendor.grand_total) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Final Amount
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="comparison-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Field</th>
+
+                                <th>Details</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+
+                                    Tender Name
+
+                                </td>
+
+                                <td>
+
+                                    {{ tender.tender_name }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    Department
+
+                                </td>
+
+                                <td>
+
+                                    {{ tender.department_name }}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    Selected Vendor
+
+                                </td>
+
+                                <td>
+
+                                    {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <td>
+
+                                    Commercial Status
+
+                                </td>
+
+                                <td>
+
+                                    Evaluation Completed
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="button-area">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(7)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        onclick="generateReport()">
+
+                        <i class="fa-solid fa-file-lines"></i>
+
+                        Generate Report
+
+                    </button>
+
+                    <button
+                        class="primary-btn"
+                        onclick="downloadReport()">
+
+                        <i class="fa-solid fa-download"></i>
+
+                        Download PDF
+
+                    </button>
+
+                    <button
+                        class="next-btn"
+                        onclick="showPage(9)">
+
+                        Continue
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================
+                STEP 9
+        ==================================== -->
+
+        <div class="workflow-page{% if initial_step == 9 %} active{% endif %}" id="page9">
+
+            <div class="section-card completion-card">
+
+                <div class="success-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+                <h1>
+
+                    Tender Evaluation Completed
+
+                </h1>
+
+                <p>
+
+                    The commercial evaluation process has been completed successfully.
+
+                </p>
+
+                <div class="summary-row">
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-file-contract"></i>
+
+                        <h3>
+
+                            {{ tender.tender_number }}
+
+                        </h3>
+
+                        <p>
+
+                            Tender Number
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-building"></i>
+
+                        <h3>
+
+                            {% if best_vendor %}{{ best_vendor.company_name }}{% else %}No quotations yet{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Selected Vendor
+
+                        </p>
+
+                    </div>
+
+                    <div class="summary-card">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        <h3 id="completedAmount">
+
+                            {% if best_vendor %}₹ {{ "{:,.2f}".format(best_vendor.grand_total) }}{% else %}—{% endif %}
+
+                        </h3>
+
+                        <p>
+
+                            Final Amount
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="completion-buttons">
+
+                    <button
+                        class="back-btn"
+                        onclick="showPage(8)">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="primary-btn">
+
+                        <i class="fa-solid fa-house"></i>
+
+                        Back to Dashboard
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/tender.js') }}"></script>
+
+</body>
+
+</html>
