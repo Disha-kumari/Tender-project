@@ -4,7 +4,7 @@ A web-based application developed to streamline and automate the **commercial ev
 
 ---
 
-## 📌 About the Project
+## About the Project
 
 The **MRPL Tender Commercial Evaluation System** was developed as an internship project at **Mangalore Refinery and Petrochemicals Limited (MRPL)**.
 
@@ -14,7 +14,7 @@ This project provides a centralized web-based platform to digitize these activit
 
 ---
 
-## 🎯 Objectives
+##  Objectives
 
 - Centralize tender, vendor, quotation, evaluation, and report information.
 - Reduce manual effort involved in commercial evaluation.
@@ -26,24 +26,24 @@ This project provides a centralized web-based platform to digitize these activit
 
 ---
 
-## ✨ Key Features
+##  Key Features
 
-### 🔐 User Authentication
+###  User Authentication
 Secure login functionality for authorized users.
 
-### 📋 Tender Management
+###  Tender Management
 Create and manage tender details including tender number, department, estimated cost, tender dates, and status.
 
-### 🏢 Vendor Management
+###  Vendor Management
 Maintain vendor information including company details, contact information, GST number, and other relevant details.
 
-### 📦 Tender Item Management
+###  Tender Item Management
 Manage tender items, quantities, and estimated costs.
 
-### 📄 Vendor Quotation Management
+###  Vendor Quotation Management
 Store and manage vendor quotations and item-wise quoted rates.
 
-### 📊 Commercial Evaluation
+###  Commercial Evaluation
 Automatically perform:
 
 - Item-wise quotation comparison
@@ -55,10 +55,10 @@ Automatically perform:
 - Vendor ranking
 - L1 vendor identification
 
-### 🤝 Negotiation Management
+###  Negotiation Management
 Maintain negotiation details and final negotiated prices.
 
-### 📈 Dashboard
+###  Dashboard
 Display important procurement statistics such as:
 
 - Total Departments
@@ -68,12 +68,12 @@ Display important procurement statistics such as:
 - Total Reports
 - Tender Status
 
-### 📑 Report Generation
+###  Report Generation
 Generate commercial evaluation reports in PDF format containing tender details, vendor information, quotation details, commercial calculations, and final totals.
 
 ---
 
-## 🔄 System Workflow
+##  System Workflow
 
 ```text
 Login
@@ -95,7 +95,8 @@ Vendor Comparison & Ranking
 Negotiation
    ↓
 Report Generation
-🛠️ Technology Stack
+
+Technology Stack
 Technology	Purpose
 Python	Programming Language
 Flask	Backend Framework
@@ -108,7 +109,8 @@ PyODBC	Database Connectivity
 ReportLab	PDF Generation
 SQL Server Management Studio	Database Management
 Visual Studio Code	Development Environment
-🗄️ Database Design
+
+Database Design
 
 The application uses Microsoft SQL Server as its relational database.
 
@@ -127,7 +129,7 @@ Reports
 
 Foreign-key relationships are used to maintain referential integrity between related entities.
 
-📁 Project Structure
+Project Structure
 Tender-project/
 │
 ├── database/
@@ -143,7 +145,8 @@ Tender-project/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-⚙️ Installation & Setup
+
+Installation & Setup
 1. Clone the Repository
 git clone https://github.com/Disha-kumari/Tender-project.git
 2. Navigate to the Project Directory
@@ -170,7 +173,7 @@ python app.py
 
 Open the local Flask server URL displayed in the terminal to access the application.
 
-📊 Project Testing
+Project Testing
 
 The application was tested using sample procurement data consisting of:
 
@@ -185,7 +188,7 @@ MRPL002 – Fire Water Pump Procurement
 
 The system successfully performed quotation storage, commercial comparison, vendor ranking, L1 identification, and PDF report generation.
 
-📄 Generated Reports
+Generated Reports
 
 The system generates PDF reports containing:
 
@@ -200,7 +203,7 @@ Grand Total
 Delivery Period
 Payment Terms
 Authorized Signatory
-🚀 Future Enhancements
+Future Enhancements
 
 The system can be further extended with:
 
@@ -215,7 +218,8 @@ Mobile application support
 Cloud deployment
 Enhanced role-based access control
 Integration with e-procurement platforms
-⚠️ Current Limitations
+
+Current Limitations
 The current implementation focuses primarily on the commercial evaluation stage.
 The application currently operates in a local server environment.
 ERP/SAP integration is not included.
@@ -223,14 +227,15 @@ Email and SMS notifications are not integrated.
 Digital signatures and electronic approvals are not supported.
 Online payment processing is not included.
 The system requires a predefined vendor quotation structure for PDF data extraction.
-👥 Project Team
+
+Project Team
 Name	USN	Branch
 Disha Kumari	NNM24IS074	Information Science and Engineering
 Disha Naveen	NNM24IS075	Information Science and Engineering
 Disha S Rao	NNM24IS076	Information Science and Engineering
 Esha P Puthran	NNM24IS082	Information Science and Engineering
-🏢 Internship
 
+Internship
 Mangalore Refinery and Petrochemicals Limited (MRPL)
 Information Systems Department
 
@@ -238,6 +243,5 @@ Project: Tender Commercial Evaluation
 Duration: 02 July 2026 – 31 July 2026
 Institution: NMAM Institute of Technology, Nitte
 
-📜 License
-
+License
 This project was developed as part of an academic internship project and is intended for educational and demonstration purposes.
